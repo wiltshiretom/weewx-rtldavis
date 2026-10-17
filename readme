@@ -25,7 +25,7 @@ Installation
 
 1.b) install golang
     eg: on raspberry pi:
-    sudo apt-get install golang
+	sudo apt-get install golang git cmake librtlsdr-dev rtl-sdr
 
 2) download the driver
 
@@ -33,11 +33,11 @@ wget -O weewx-rtldavis-master.zip https://github.com/lheijst/weewx-rtldavis/arch
 
 3) install the driver
 
-sudo wee_extension --install weewx-rtldavis-master.zip
+sudo weectl extension install weewx-rtldavis-master.zip
 
 4) configure the weewx driver
 
-sudo wee_config --reconfigure --driver=user.rtldavis --no-prompt
+sudo weectl station reconfigure  --driver=user.rtldavis --no-prompt
 
 5) compile the GO sources when needed (see below)
 
@@ -73,6 +73,7 @@ sudo /etc/init.d/weewx start
 5.b) compile the GO src files when needed (i.e. when changed)
 	cd $GOPATH/src/github.com/lheijst/rtldavis
 	go install -v .
+	
 	The executable is: /home/pi/work/bin/rtldavis
 
 ===============================================================================

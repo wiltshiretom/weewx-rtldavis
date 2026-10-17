@@ -1404,12 +1404,22 @@ Actions:
                     ld_library_path=options.ld_library_path)
         while mgr.running():
             for lines in mgr.get_stderr():
+                if not lines:
+                    log.debug("get_stderr yielded empty list (queue timeout with no data)")
+                    continue
                 payload = lines[0].strip()
                 if payload:
                     print(payload)
+                else:
+                    log.debug("get_stderr: unexpected empty payload after strip()")
                 lines.pop(0)
             for lines in mgr.get_stdout():
+                if not lines:
+                    log.debug("get_stdout returned empty list")
+                    continue
                 err = lines[0].strip()
                 if err:
                     print(err)
+                else:
+                    log.debug("get_stdout: unexpected empty line after strip()")
                 lines.pop(0)
